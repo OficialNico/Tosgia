@@ -4,11 +4,12 @@ import { View, Text, StyleSheet } from 'react-native';
 const ChatScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>This is the Chat Screen</Text>
+      <Text style={styles.text}>Este es el Chat</Text>
     </View>
   );
 };
 
+// Estilos para la pantalla
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -18,8 +19,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    color: '#333',
+    color: '#000',
   },
 });
 
 export default ChatScreen;
+

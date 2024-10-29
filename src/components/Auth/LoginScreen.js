@@ -1,3 +1,4 @@
+// src/components/Auth/LoginScreen.js
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 
@@ -9,13 +10,14 @@ const LoginScreen = ({ navigation }) => {
   // Función para manejar la redirección según el rol
   const handleLogin = () => {
     if (selectedRole === "user" || selectedRole === "professional") {
-      navigation.replace("Main"); // Reemplaza la pantalla actual con el navegador principal después del inicio de sesión exitoso
+      navigation.replace("Main", { role: selectedRole }); // Reemplaza la pantalla actual con el navegador principal pasando el rol
     } else {
       alert("Por favor, selecciona tu rol antes de iniciar sesión.");
     }
   };
+
   const handleCreateAccount = () => {
-    navigation.navigate("CreateAccount"); // Navega a la pantalla de creación de cuenta
+    navigation.navigate("CreateAccount"); // Navegar a la pantalla de crear cuenta
   };
 
   return (
@@ -66,24 +68,10 @@ const LoginScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Ingresar</Text>
       </TouchableOpacity>
-    {/* Botones para iniciar sesión con Google, Facebook o Apple */}
-    <View style={styles.socialLoginContainer}>
-        <Text style={styles.socialLoginText}>¿Olvisate tu contraseña?</Text>
-        <View style={styles.socialButtonsContainer}>
-          <TouchableOpacity style={styles.socialButton}>
-            <Text style={styles.socialButtonText}>Google</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.socialButton}>
-            <Text style={styles.socialButtonText}>Facebook</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.socialButton}>
-            <Text style={styles.socialButtonText}>Applee</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      {/* Botón para crear una cuenta */}
+
+      {/* Botón para crear cuenta */}
       <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
-        <Text style={styles.createAccountText}>Crear Cuenta</Text>
+        <Text style={styles.createAccountButtonText}>Crear Cuenta</Text>
       </TouchableOpacity>
     </View>
   );
@@ -149,54 +137,24 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: "100%",
     alignItems: "center",
-    marginBottom: -15,
+    marginBottom: 10,
   },
   loginButtonText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
   },
-    forgotPasswordText: {
-      color: '#007AFF',
-      marginTop: 15,
-      textDecorationLine: 'underline',
-    },
-    socialLoginContainer: {
-      marginTop: 30,
-      alignItems: 'center',
-    },
-    socialLoginText: {
-      fontSize: 12,
-      marginBottom: 20,
-    },
-    socialButtonsContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    socialButton: {
-      marginHorizontal: 10,
-      paddingVertical: 10,
-      paddingHorizontal: 20,
-      borderRadius: 5,
-      borderWidth: 1,
-      borderColor: '#ddd',
-      backgroundColor: '#f8f8f8',
-    },
-    socialButtonText: {
-      fontSize: 12,
-      color: '#333',
-    },
-    createAccountButton: {
-      marginTop: 80,
-      padding: 10,
-      backgroundColor: "#333",
-      borderRadius: 5,
-      width: "80%",
-      alignItems: "center",
-    },
-    createAccountText: {
-      color: "#fff",
-      fontSize: 16,
-      fontWeight: "bold",
-    },  
-  });
+  createAccountButton: {
+    marginTop: 20,
+    padding: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#333",
+    backgroundColor: "#fff",
+  },
+  createAccountButtonText: {
+    color: "#333",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+});
