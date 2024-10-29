@@ -1,10 +1,12 @@
 import React from 'react';
-import AppNavigator from './src/navigation/AppNavigator';
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigator from './src/navigation/AppNavigator'; // Asegúrate de tener la ruta correcta
 
 const App = () => {
   return (
-    // El único NavigationContainer debe estar dentro del AppNavigator o en App.js.
-    <AppNavigator />
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
   );
 };
 
