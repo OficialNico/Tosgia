@@ -14,9 +14,13 @@ const LoginScreen = ({ navigation }) => {
       alert("Por favor, selecciona tu rol antes de iniciar sesión.");
     }
   };
+  const handleCreateAccount = () => {
+    navigation.navigate("CreateAccount"); // Navega a la pantalla de creación de cuenta
+  };
 
   return (
     <View style={styles.container}>
+      <Text style={styles.titulo}>Tosgia</Text>
       <Text style={styles.title}>Iniciar Sesión</Text>
       
       {/* Botones para seleccionar el rol */}
@@ -44,7 +48,7 @@ const LoginScreen = ({ navigation }) => {
       {/* Campo de entrada para el nombre de usuario */}
       <TextInput
         style={styles.input}
-        placeholder="Usuario"
+        placeholder="Usuario o Correo electronico"
         value={username}
         onChangeText={setUsername}
       />
@@ -62,6 +66,25 @@ const LoginScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Ingresar</Text>
       </TouchableOpacity>
+    {/* Botones para iniciar sesión con Google, Facebook o Apple */}
+    <View style={styles.socialLoginContainer}>
+        <Text style={styles.socialLoginText}>¿Olvisate tu contraseña?</Text>
+        <View style={styles.socialButtonsContainer}>
+          <TouchableOpacity style={styles.socialButton}>
+            <Text style={styles.socialButtonText}>Google</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialButton}>
+            <Text style={styles.socialButtonText}>Facebook</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialButton}>
+            <Text style={styles.socialButtonText}>Applee</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      {/* Botón para crear una cuenta */}
+      <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
+        <Text style={styles.createAccountText}>Crear Cuenta</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -75,12 +98,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
-    backgroundColor: "#f5f5f5"
+    backgroundColor: "#1ff"
+  },
+  titulo: {
+    fontSize: 35,
+    fontWeight: "bold",
+    margintop: 10
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20
+    marginBottom: 20,
+    marginTop: 10
   },
   roleContainer: {
     flexDirection: "row",
@@ -96,10 +125,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#333",
     marginHorizontal: 5,
-    backgroundColor: "#e0e0e0"
+    backgroundColor: "#333"
   },
   selectedRoleButton: {
-    backgroundColor: "#333", // Color para el botón seleccionado
+    backgroundColor: "#e00", // Color para el botón seleccionado
   },
   roleText: {
     color: "#fff",
@@ -119,11 +148,55 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     width: "100%",
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: -15,
   },
   loginButtonText: {
     color: "#fff",
     fontSize: 16,
-    fontWeight: "bold"
-  }
-});
+    fontWeight: "bold",
+  },
+    forgotPasswordText: {
+      color: '#007AFF',
+      marginTop: 15,
+      textDecorationLine: 'underline',
+    },
+    socialLoginContainer: {
+      marginTop: 30,
+      alignItems: 'center',
+    },
+    socialLoginText: {
+      fontSize: 12,
+      marginBottom: 20,
+    },
+    socialButtonsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    socialButton: {
+      marginHorizontal: 10,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      borderRadius: 5,
+      borderWidth: 1,
+      borderColor: '#ddd',
+      backgroundColor: '#f8f8f8',
+    },
+    socialButtonText: {
+      fontSize: 12,
+      color: '#333',
+    },
+    createAccountButton: {
+      marginTop: 80,
+      padding: 10,
+      backgroundColor: "#333",
+      borderRadius: 5,
+      width: "80%",
+      alignItems: "center",
+    },
+    createAccountText: {
+      color: "#fff",
+      fontSize: 16,
+      fontWeight: "bold",
+    },  
+  });
