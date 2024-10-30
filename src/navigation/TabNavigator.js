@@ -1,7 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import HomeScreen from '../components/User/UserHomeScreen';
+import UserHomeScreen from '../components/User/UserHomeScreen';
+import ProfessionalHomeScreen from '../components/Professional/ProfessionalHomeScreen';
 import NetworkScreen from '../components/User/NetworkScreen';
 import ExploreScreen from '../components/User/ExploreScreen';
 import NotificationScreen from '../components/User/NotificationScreen';
@@ -9,7 +10,9 @@ import ProfileScreen from '../components/User/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
+const TabNavigator = ({ route }) => {
+  const { selectedRole } = route.params; // Obtenemos el rol seleccionado para determinar la pantalla de inicio
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -38,7 +41,10 @@ const TabNavigator = () => {
         headerShown: false,
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen 
+        name="Home" 
+        component={selectedRole === 'professional' ? ProfessionalHomeScreen : UserHomeScreen} 
+      />
       <Tab.Screen name="Network" component={NetworkScreen} />
       <Tab.Screen name="Explore" component={ExploreScreen} />
       <Tab.Screen name="Notifications" component={NotificationScreen} />

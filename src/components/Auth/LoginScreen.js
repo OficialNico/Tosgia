@@ -1,30 +1,35 @@
-// Ruta: src/components/Auth/LoginScreen.js
-
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from "react-native";
 
 const LoginScreen = ({ navigation }) => {
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(null); // Guarda si es 'user' o 'professional'
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  // Función para manejar la redirección según el rol
   const handleLogin = () => {
-    if (selectedRole === "user" || selectedRole === "professional") {
-      navigation.replace("Main", { selectedRole });
-    } else {
-      alert("Por favor, selecciona tu rol antes de iniciar sesión.");
+    if (!selectedRole) {
+      Alert.alert("Error", "Por favor, selecciona tu rol antes de iniciar sesión.");
+    } else if (selectedRole === "user") {
+      navigation.replace("UserHome");
+    } else if (selectedRole === "professional") {
+      navigation.replace("ProfessionalHome");
     }
   };
 
+  const handleCreateAccount = () => {
+    navigation.navigate("CreateAccount"); // Navegar a la pantalla de crear cuenta
+  };
+
   const handleForgotPassword = () => {
-    navigation.navigate("ForgotPassword");
+    navigation.navigate("ForgotPassword"); // Navegar a la pantalla de recuperación de contraseña
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Tosgia</Text>
-      <Text style={styles.title}>Iniciar Sesión</Text>
       
+      {/* Botones para seleccionar el rol */}
       <View style={styles.roleContainer}>
         <TouchableOpacity
           style={[
@@ -46,12 +51,15 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
+      {/* Campo de entrada para el nombre de usuario */}
       <TextInput
         style={styles.input}
-        placeholder="Usuario o Correo electrónico"
+        placeholder="Usuario o Correo electronico"
         value={username}
         onChangeText={setUsername}
       />
+      
+      {/* Campo de entrada para la contraseña */}
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
@@ -60,21 +68,27 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={setPassword}
       />
 
+      {/* Botón de inicio de sesión */}
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Ingresar</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleForgotPassword}>
-        <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
+      {/* Botón para crear cuenta */}
+      <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
+        <Text style={styles.createAccountButtonText}>Crear Cuenta</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.createAccountButton} onPress={() => navigation.navigate("CreateAccount")}>
-        <Text style={styles.createAccountButtonText}>Crear Cuenta</Text>
+      {/* Botón de olvidó la contraseña */}
+      <TouchableOpacity style={styles.forgotPasswordButton} onPress={handleForgotPassword}>
+        <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
+export default LoginScreen;
+
+// Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -87,12 +101,6 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: "bold",
     margintop: 10
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    marginTop: 10
   },
   roleContainer: {
     flexDirection: "row",
@@ -111,7 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#333"
   },
   selectedRoleButton: {
-    backgroundColor: "#e00",
+    backgroundColor: "#e00", // Color para el botón seleccionado
   },
   roleText: {
     color: "#fff",
@@ -139,11 +147,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  forgotPasswordText: {
-    color: "#0000ff",
-    textDecorationLine: "underline",
-    marginVertical: 10,
-  },
   createAccountButton: {
     marginTop: 20,
     padding: 10,
@@ -157,6 +160,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
+  forgotPasswordButton: {
+    marginTop: 15,
+  },
+  forgotPasswordText: {
+    color: "#e91e63",
+    fontSize: 16,
+    textDecorationLine: "underline"
+  },
 });
-
-export default LoginScreen;
