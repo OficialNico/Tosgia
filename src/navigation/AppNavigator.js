@@ -1,3 +1,5 @@
+// AppNavigator.js
+
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -5,10 +7,14 @@ import LoginScreen from '../components/Auth/LoginScreen';
 import CreateAccountScreen from '../components/Auth/CreateAccountScreen';
 import ForgotPasswordScreen from '../components/Auth/ForgotPasswordScreen';
 import TabNavigator from './TabNavigator';
+import ProfessionalHomeScreen from '../components/Professional/ProfessionalHomeScreen';
+import ChatScreen from '../components/Shared/ChatScreen';
 
 const Stack = createStackNavigator();
 
-const AppNavigator = () => {
+const AppNavigator = ({ route }) => {
+  const { selectedRole } = route?.params || {};
+
   return (
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen
@@ -27,16 +33,19 @@ const AppNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="UserHome"
+        name="HomeTabs"
         component={TabNavigator}
         options={{ headerShown: false }}
-        initialParams={{ selectedRole: 'user' }}
       />
       <Stack.Screen
         name="ProfessionalHome"
-        component={TabNavigator}
+        component={ProfessionalHomeScreen}
         options={{ headerShown: false }}
-        initialParams={{ selectedRole: 'professional' }}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={ChatScreen}
+        options={{ headerShown: true, title: 'Chat' }}
       />
     </Stack.Navigator>
   );

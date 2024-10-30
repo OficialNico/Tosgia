@@ -8,12 +8,12 @@ const LoginScreen = ({ navigation }) => {
 
   // Función para manejar la redirección según el rol
   const handleLogin = () => {
-    if (!selectedRole) {
-      Alert.alert("Error", "Por favor, selecciona tu rol antes de iniciar sesión.");
-    } else if (selectedRole === "user") {
-      navigation.replace("UserHome");
+    if (selectedRole === "user") {
+      navigation.replace("HomeTabs", { screen: "UserHome" });
     } else if (selectedRole === "professional") {
-      navigation.replace("ProfessionalHome");
+      navigation.replace("HomeTabs", { screen: "ProfessionalHome" });
+    } else {
+      alert("Por favor, selecciona tu rol antes de iniciar sesión.");
     }
   };
 
