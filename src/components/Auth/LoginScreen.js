@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     color: '#007AFF',
     marginTop: 15,
-    textDecorationLine: 'underline',
+    fontSize: 12,
   },
   createAccountButton: {
     marginTop: 20,
