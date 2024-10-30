@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { DarkModeProvider } from './src/context/DarkModeContext'; // Asegúrate de tener el contexto para el modo oscuro
+import { DarkModeProvider } from './src/context/DarkModeContext';
 import AppNavigator from './src/navigation/AppNavigator';
 
 const App = () => {

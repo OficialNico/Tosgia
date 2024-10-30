@@ -1,21 +1,15 @@
-// Ruta: src/navigation/TabNavigator.js
-
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import UserHomeScreen from '../components/User/UserHomeScreen';
-import ProfessionalHomeScreen from '../components/Professional/ProfessionalHomeScreen';
-import ProfileScreen from '../components/User/ProfileScreen';
-import NotificationScreen from '../components/User/NotificationScreen';
+import HomeScreen from '../components/User/UserHomeScreen';
 import NetworkScreen from '../components/User/NetworkScreen';
 import ExploreScreen from '../components/User/ExploreScreen';
-
+import NotificationScreen from '../components/User/NotificationScreen';
+import ProfileScreen from '../components/User/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = ({ route }) => {
-  const { selectedRole } = route.params; // Obtiene el rol seleccionado desde los parámetros
-
+const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -26,25 +20,25 @@ const TabNavigator = ({ route }) => {
             iconName = 'home-outline';
           } else if (route.name === 'Network') {
             iconName = 'people-outline';
+          } else if (route.name === 'Explore') {
+            iconName = 'compass-outline';
           } else if (route.name === 'Notifications') {
             iconName = 'notifications-outline';
           } else if (route.name === 'Profile') {
             iconName = 'person-outline';
-          } else if (route.name === 'Explore') {
-            iconName = 'compass-outline';
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#e91e63',
         tabBarInactiveTintColor: 'gray',
+        tabBarStyle: {
+          backgroundColor: '#fff',
+        },
+        headerShown: false,
       })}
     >
-      {selectedRole === 'user' ? (
-        <Tab.Screen name="Home" component={UserHomeScreen} />
-      ) : (
-        <Tab.Screen name="Home" component={ProfessionalHomeScreen} />
-      )}
+      <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Network" component={NetworkScreen} />
       <Tab.Screen name="Explore" component={ExploreScreen} />
       <Tab.Screen name="Notifications" component={NotificationScreen} />
