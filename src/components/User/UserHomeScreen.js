@@ -1,59 +1,93 @@
-import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { DarkModeContext } from '../../context/DarkModeContext'; // Ajusta la ruta según la ubicación de DarkModeContext.js
+// Ruta: src/components/User/UserHomeScreen.js
 
-const UserHomeScreen = ({ navigation }) => {
-  const { isDarkMode } = useContext(DarkModeContext);
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
+const UserHomeScreen = () => {
   return (
-    <View style={[styles.container, isDarkMode && styles.containerDark]}>
+    <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={[styles.title, isDarkMode && styles.titleDark]}>Inicio</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
-          <Ionicons name="chatbubble-outline" size={24} color={isDarkMode ? '#fff' : '#000'} />
+        <Text>Inicio</Text>
+        <TouchableOpacity>
+          <Text style={styles.chatIcon}>💬</Text>
         </TouchableOpacity>
       </View>
-      <Text style={[styles.text, isDarkMode && styles.textDark]}>
-        Bienvenido al Home del Usuario
-      </Text>
+
+      <View style={styles.profileContainer}>
+        <Image source={{ uri: 'placeholder_image_url' }} style={styles.profileImage} />
+        <Text style={styles.profileName}>NOMBRE APELLIDO</Text>
+        <Text style={styles.about}>Sobre mi</Text>
+      </View>
+
+      <View style={styles.galleryContainer}>
+        <Text style={styles.galleryText}>Galería</Text>
+      </View>
+
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>INICIO</Text>
+        <Text style={styles.footerText}>MI RED</Text>
+        <Text style={styles.footerText}>EXPLORAR</Text>
+        <Text style={styles.footerText}>NOTIFICACIÓN</Text>
+        <Text style={styles.footerText}>PERFIL</Text>
+      </View>
     </View>
   );
 };
 
+export default UserHomeScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#fff',
-  },
-  containerDark: {
-    backgroundColor: '#333',
+    padding: 20,
+    backgroundColor: '#1ff',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    paddingVertical: 16,
+    marginBottom: 20,
   },
-  title: {
+  chatIcon: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#000',
   },
-  titleDark: {
-    color: '#fff',
+  profileContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
   },
-  text: {
-    marginTop: 20,
+  profileImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#ddd',
+  },
+  profileName: {
     fontSize: 18,
-    color: '#000',
+    fontWeight: 'bold',
+    marginVertical: 5,
   },
-  textDark: {
-    color: '#fff',
+  about: {
+    fontSize: 14,
+  },
+  galleryContainer: {
+    backgroundColor: '#fff',
+    height: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  galleryText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingVertical: 10,
+    backgroundColor: '#f0f0f0',
+  },
+  footerText: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
-
-export default UserHomeScreen;

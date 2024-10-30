@@ -1,26 +1,23 @@
+// Ruta: src/components/Auth/LoginScreen.js
+
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 
 const LoginScreen = ({ navigation }) => {
-  const [selectedRole, setSelectedRole] = useState(null); // Guarda si es 'user' o 'professional'
+  const [selectedRole, setSelectedRole] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // Función para manejar la redirección según el rol
   const handleLogin = () => {
     if (selectedRole === "user" || selectedRole === "professional") {
-      navigation.replace("Main"); // Reemplaza la pantalla actual con el navegador principal después del inicio de sesión exitoso
+      navigation.replace("Main", { selectedRole });
     } else {
       alert("Por favor, selecciona tu rol antes de iniciar sesión.");
     }
   };
 
-  const handleCreateAccount = () => {
-    navigation.navigate("CreateAccount"); // Navegar a la pantalla de crear cuenta
-  };
-
   const handleForgotPassword = () => {
-    navigation.navigate("ForgotPassword"); // Navegar a la pantalla de recuperación de contraseña
+    navigation.navigate("ForgotPassword");
   };
 
   return (
@@ -28,7 +25,6 @@ const LoginScreen = ({ navigation }) => {
       <Text style={styles.titulo}>Tosgia</Text>
       <Text style={styles.title}>Iniciar Sesión</Text>
       
-      {/* Botones para seleccionar el rol */}
       <View style={styles.roleContainer}>
         <TouchableOpacity
           style={[
@@ -50,15 +46,12 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Campo de entrada para el nombre de usuario */}
       <TextInput
         style={styles.input}
-        placeholder="Usuario o Correo electronico"
+        placeholder="Usuario o Correo electrónico"
         value={username}
         onChangeText={setUsername}
       />
-      
-      {/* Campo de entrada para la contraseña */}
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
@@ -67,27 +60,21 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={setPassword}
       />
 
-      {/* Botón de inicio de sesión */}
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Ingresar</Text>
       </TouchableOpacity>
 
-      {/* Enlace para olvidaste tu contraseña */}
       <TouchableOpacity onPress={handleForgotPassword}>
         <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
       </TouchableOpacity>
 
-      {/* Botón para crear cuenta */}
-      <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
+      <TouchableOpacity style={styles.createAccountButton} onPress={() => navigation.navigate("CreateAccount")}>
         <Text style={styles.createAccountButtonText}>Crear Cuenta</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default LoginScreen;
-
-// Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -124,7 +111,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#333"
   },
   selectedRoleButton: {
-    backgroundColor: "#e00", // Color para el botón seleccionado
+    backgroundColor: "#e00",
   },
   roleText: {
     color: "#fff",
@@ -153,9 +140,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   forgotPasswordText: {
-    color: '#007AFF',
-    marginTop: 15,
-    fontSize: 12,
+    color: "#0000ff",
+    textDecorationLine: "underline",
+    marginVertical: 10,
   },
   createAccountButton: {
     marginTop: 20,
@@ -172,3 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
+export default LoginScreen;
