@@ -5,23 +5,16 @@ import { DarkModeContext } from '../../context/DarkModeContext';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
-  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
+  const { isDarkMode, resetDarkMode } = useContext(DarkModeContext);
 
-  // Función para manejar el cierre de sesión
   const handleLogout = () => {
-    // Desactivar el modo oscuro si está activo
-    if (isDarkMode) {
-      setIsDarkMode(false);
-    }
-    // Navegar al inicio de sesión
-    navigation.replace('Login');
+    resetDarkMode(); // Restablece el modo oscuro
+    navigation.replace('Login'); // Navegar a la pantalla de inicio de sesión
   };
 
   return (
     <View style={[styles.container, isDarkMode && styles.containerDark]}>
-      <Text style={[styles.title, isDarkMode && styles.titleDark]}>Perfil del Usuario</Text>
-
-      {/* Botón para cerrar sesión */}
+      <Text style={[styles.text, isDarkMode && styles.textDark]}>Perfil del Usuario</Text>
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutButtonText}>Cerrar Sesión</Text>
       </TouchableOpacity>
@@ -29,7 +22,6 @@ const ProfileScreen = () => {
   );
 };
 
-// Estilos para la pantalla de perfil
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -40,12 +32,11 @@ const styles = StyleSheet.create({
   containerDark: {
     backgroundColor: '#333',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  text: {
+    fontSize: 18,
     color: '#000',
   },
-  titleDark: {
+  textDark: {
     color: '#fff',
   },
   logoutButton: {
