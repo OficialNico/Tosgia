@@ -2,32 +2,38 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 
 const LoginScreen = ({ navigation }) => {
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedRole, setSelectedRole] = useState(null); // Guarda si es 'user' o 'professional'
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  // Función para manejar la redirección según el rol
   const handleLogin = () => {
     if (selectedRole === "user" || selectedRole === "professional") {
-      navigation.replace("Main");
+      navigation.replace("Main"); // Reemplaza la pantalla actual con el navegador principal después del inicio de sesión exitoso
     } else {
       alert("Por favor, selecciona tu rol antes de iniciar sesión.");
     }
   };
 
   const handleCreateAccount = () => {
-    navigation.navigate("CreateAccount");
+    navigation.navigate("CreateAccount"); // Navegar a la pantalla de crear cuenta
+  };
+
+  const handleForgotPassword = () => {
+    navigation.navigate("ForgotPassword"); // Navegar a la pantalla de recuperación de contraseña
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Tosgia</Text>
       <Text style={styles.title}>Iniciar Sesión</Text>
-
+      
+      {/* Botones para seleccionar el rol */}
       <View style={styles.roleContainer}>
         <TouchableOpacity
           style={[
             styles.roleButton,
-            selectedRole === "user" && styles.selectedRoleButton,
+            selectedRole === "user" && styles.selectedRoleButton
           ]}
           onPress={() => setSelectedRole("user")}
         >
@@ -36,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
         <TouchableOpacity
           style={[
             styles.roleButton,
-            selectedRole === "professional" && styles.selectedRoleButton,
+            selectedRole === "professional" && styles.selectedRoleButton
           ]}
           onPress={() => setSelectedRole("professional")}
         >
@@ -44,12 +50,15 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
+      {/* Campo de entrada para el nombre de usuario */}
       <TextInput
         style={styles.input}
-        placeholder="Usuario o Correo electrónico"
+        placeholder="Usuario o Correo electronico"
         value={username}
         onChangeText={setUsername}
       />
+      
+      {/* Campo de entrada para la contraseña */}
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
@@ -58,10 +67,17 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={setPassword}
       />
 
+      {/* Botón de inicio de sesión */}
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginButtonText}>Ingresar</Text>
       </TouchableOpacity>
 
+      {/* Enlace para olvidaste tu contraseña */}
+      <TouchableOpacity onPress={handleForgotPassword}>
+        <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
+      </TouchableOpacity>
+
+      {/* Botón para crear cuenta */}
       <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
         <Text style={styles.createAccountButtonText}>Crear Cuenta</Text>
       </TouchableOpacity>
@@ -69,31 +85,33 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-// Definir estilos para LoginScreen
+export default LoginScreen;
+
+// Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
-    backgroundColor: "#1ff",
+    backgroundColor: "#1ff"
   },
   titulo: {
     fontSize: 35,
     fontWeight: "bold",
-    marginTop: 10,
+    margintop: 10
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    marginTop: 10,
+    marginTop: 10
   },
   roleContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-    marginBottom: 20,
+    marginBottom: 20
   },
   roleButton: {
     flex: 1,
@@ -103,14 +121,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#333",
     marginHorizontal: 5,
-    backgroundColor: "#333",
+    backgroundColor: "#333"
   },
   selectedRoleButton: {
-    backgroundColor: "#e00",
+    backgroundColor: "#e00", // Color para el botón seleccionado
   },
   roleText: {
     color: "#fff",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   input: {
     width: "100%",
@@ -119,7 +137,7 @@ const styles = StyleSheet.create({
     borderColor: "#333",
     borderWidth: 1,
     marginBottom: 15,
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   },
   loginButton: {
     backgroundColor: "#333",
@@ -133,6 +151,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  forgotPasswordText: {
+    color: '#007AFF',
+    marginTop: 15,
+    textDecorationLine: 'underline',
   },
   createAccountButton: {
     marginTop: 20,
@@ -149,4 +172,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
