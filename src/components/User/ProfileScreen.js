@@ -46,10 +46,10 @@ const ProfileScreen = ({ navigation }) => {
 
             {/* Botones del menú */}
             <TouchableOpacity style={styles.modalButton}>
-              <Text style={styles.modalButtonText}>Ayuda</Text>
+              <Text style={styles.modalButtonText}>Ayudaa</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalButton}>
-              <Text style={styles.modalButtonText}>Configuración</Text>
+              <Text style={styles.modalButtonText}>Configuraciónn</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalButton}>
               <Text style={styles.modalButtonText}>Modo Oscuro</Text>

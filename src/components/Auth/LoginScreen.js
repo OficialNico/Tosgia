@@ -28,7 +28,9 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Tosgia</Text>
+      <Text style={styles.subtitulo}>Inicio de sesión</Text>
       
+
       {/* Botones para seleccionar el rol */}
       <View style={styles.roleContainer}>
         <TouchableOpacity
@@ -73,15 +75,15 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.loginButtonText}>Ingresar</Text>
       </TouchableOpacity>
 
-      {/* Botón para crear cuenta */}
-      <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
-        <Text style={styles.createAccountButtonText}>Crear Cuenta</Text>
-      </TouchableOpacity>
-
       {/* Botón de olvidó la contraseña */}
       <TouchableOpacity style={styles.forgotPasswordButton} onPress={handleForgotPassword}>
         <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>    
+
+      {/* Botón para crear cuenta */}
+      <TouchableOpacity style={styles.createAccountButton} onPress={handleCreateAccount}>
+        <Text style={styles.createAccountButtonText}>Crear Cuenta</Text>
+      </TouchableOpacity>  
     </View>
   );
 };
@@ -100,7 +102,12 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 35,
     fontWeight: "bold",
-    margintop: 10
+    marginBottom: 70
+  },
+  subtitulo: {
+    fontSize: 25,
+    fontWeight: "bold",
+    marginBottom: 40
   },
   roleContainer: {
     flexDirection: "row",
@@ -165,7 +172,6 @@ const styles = StyleSheet.create({
   },
   forgotPasswordText: {
     color: "#e91e63",
-    fontSize: 16,
-    textDecorationLine: "underline"
+    fontSize: 12,
   },
 });
