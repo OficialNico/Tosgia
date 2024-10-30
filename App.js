@@ -1,12 +1,15 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import TabNavigator from './src/navigation/TabNavigator';
+import { DarkModeProvider } from './src/context/DarkModeContext';
+import AppNavigator from './src/navigation/AppNavigator';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <TabNavigator />
-    </NavigationContainer>
+    <DarkModeProvider>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </DarkModeProvider>
   );
 };
 

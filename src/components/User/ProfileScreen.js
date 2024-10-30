@@ -1,19 +1,25 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useContext } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { DarkModeContext } from '../../context/DarkModeContext';
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = () => {
+  const navigation = useNavigation();
+  const { isDarkMode, setIsDarkMode } = useContext(DarkModeContext);
+
+  // Función para manejar el cierre de sesión
   const handleLogout = () => {
-    // Redirigir al usuario a la pantalla de inicio de sesión
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Login" }],
-    });
+    // Desactivar el modo oscuro si está activo
+    if (isDarkMode) {
+      setIsDarkMode(false);
+    }
+    // Navegar al inicio de sesión
+    navigation.replace('Login');
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Perfil del Usuario</Text>
-      {/* Otros componentes del perfil */}
+    <View style={[styles.container, isDarkMode && styles.containerDark]}>
+      <Text style={[styles.title, isDarkMode && styles.titleDark]}>Perfil del Usuario</Text>
 
       {/* Botón para cerrar sesión */}
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
@@ -23,33 +29,35 @@ const ProfileScreen = ({ navigation }) => {
   );
 };
 
-export default ProfileScreen;
-
-// Estilos
+// Estilos para la pantalla de perfil
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#f5f5f5",
-    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  containerDark: {
+    backgroundColor: '#333',
   },
   title: {
     fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  titleDark: {
+    color: '#fff',
   },
   logoutButton: {
     marginTop: 20,
+    backgroundColor: '#ff3333',
     padding: 10,
     borderRadius: 5,
-    backgroundColor: "#FF3B30", // Rojo para indicar la opción de cerrar sesión
-    alignItems: "center",
-    width: "100%",
   },
   logoutButtonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
+
+export default ProfileScreen;
